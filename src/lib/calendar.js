@@ -5,11 +5,18 @@ export const MakeReservation = async (startTime, endTime, name, project, email, 
     // Sends an API Request to the serverless Vercel backend
     // And returns the status of the reservation and a message to be displayed on the frontend
 
+    // startTime and endTime will be an object with the following fields:
+    // year
+    // monthIndex
+    // day
+    // hours
+    // minutes
+
     // Convert the time to ISO time for the API
     // Date constructor: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date
     // new Date(year, monthIndex, day, hours, minutes)
-    let ISO_START = new Date(startTime);
-    let ISO_END = new Date(endTime);
+    let ISO_START = new Date(startTime.year, startTime.monthIndex, startTime.day, startTime.hours, startTime.minutes);
+    let ISO_END = new Date(endTime.year, endTime.monthIndex, endTime.day, endTime.hours, endTime.minutes);
 
     ISO_START = ISO_START.toISOString();
     ISO_END = ISO_END.toISOString();
