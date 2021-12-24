@@ -21,14 +21,14 @@ export const ValidateTime = (startTime, endTime) => {
     }
 }
 
-export const ValidateDate = (month, day, year) => {
-    // input will be numbers for the month, day, and year
+export const ValidateDate = (timeString) => {
+    // input will be a string in the format yyyy-mm-dd (2021-12-23)
     // output will be boolean whether the date is valid (true) or invalid (false)
 
     // use momentjs: https://momentjs.com/docs/#/query/is-before/
     const TODAY = moment().tz('America/Los_Angeles');
     // check if the input year is before TODAY
-    return moment(`${year}-${month}-${day}`).isBefore(TODAY);
+    return moment(timeString).isBefore(TODAY);
 }
 
 const timeArraytoMin = (array) => {
