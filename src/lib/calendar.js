@@ -18,8 +18,8 @@ export const MakeReservation = async (startTime, endTime, name, project, email, 
     let ISO_START = new Date(startTime.year, startTime.monthIndex, startTime.day, startTime.hours, startTime.minutes);
     let ISO_END = new Date(endTime.year, endTime.monthIndex, endTime.day, endTime.hours, endTime.minutes);
 
-    ISO_START = ISOOffset(ISO_START.toISOString());
-    ISO_END = ISOOffset(ISO_END.toISOString());
+    ISO_START = TimeFormatAPI(ISO_START.toISOString());
+    ISO_END = TimeFormatAPI(ISO_END.toISOString());
 
     const reservationInfo = {
         start: ISO_START,
@@ -39,8 +39,15 @@ export const MakeReservation = async (startTime, endTime, name, project, email, 
     return {status: res.status, message: res.statusText};
 }
 
-const ISOOffset = (ISOString) => {
+const TimeFormatAPI = (ISOString) => {
     // input is an ISO string, such as 2011-10-05T14:48:00.000Z
+    // Return a properly formatted time, such as "2021-12-16T05:05:53+02:00"
+
+    let reformatted = ISOString.split(":");
+    // Pop the last element, which is the seconds: 
+    reformatted.pop();
+
+    // Combine the string array now and
     // Reformat to be Pacific Time offset
-    return ISOString.replace("Z", "") + "+02:00";
+    return reformatted.join() + "+02:00";
 }

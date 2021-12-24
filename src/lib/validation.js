@@ -21,7 +21,7 @@ export const ValidateTime = (startTime, endTime) => {
 
 const timeArraytoMin = (array) => {
     if (array.length < 2) {
-        throw new Error("Invalid time array size");
+        console.error("Invalid time array size");
     }
     return parseInt(array[1]) + parseInt(array[0]) * 60
 }
