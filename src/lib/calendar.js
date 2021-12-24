@@ -18,9 +18,8 @@ export const MakeReservation = async (startTime, endTime, name, project, email, 
     let ISO_START = new Date(startTime.year, startTime.monthIndex, startTime.day, startTime.hours, startTime.minutes);
     let ISO_END = new Date(endTime.year, endTime.monthIndex, endTime.day, endTime.hours, endTime.minutes);
 
-    ISO_START = ISO_START.toISOString();
-    ISO_END = ISO_END.toISOString();
-
+    ISO_START = ISOOffset(ISO_START.toISOString());
+    ISO_END = ISOOffset(ISO_END.toISOString());
 
     const reservationInfo = {
         start: ISO_START,
@@ -38,4 +37,10 @@ export const MakeReservation = async (startTime, endTime, name, project, email, 
     console.log(res.status);
     console.log(res.statusText);
     return {status: res.status, message: res.statusText};
+}
+
+const ISOOffset = (ISOString) => {
+    // input is an ISO string, such as 2011-10-05T14:48:00.000Z
+    // Reformat to be Pacific Time offset
+    return ISOString.replace("Z", "") + "+02:00";
 }
