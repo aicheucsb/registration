@@ -1,5 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
+import { ValidateTime, ValidateDate } from './lib/validation';
+import { MakeReservation } from './lib/calendar';
+import { ReactEmbeddedGoogleCalendar } from 'react-embedded-google-calendar';
 
 function App() {
 
@@ -45,7 +48,7 @@ function App() {
 
           <input type="submit" id="submitb" value="Submit!" />
         </form>
-        
+        <ReactEmbeddedGoogleCalendar publicUrl = "https://calendar.google.com/calendar/embed?src=cscae19m9abei8bv23e1queim8%40group.calendar.google.com&ctz=America%2FLos_Angeles" height="500px"/>
       </div>
     </div>
   );

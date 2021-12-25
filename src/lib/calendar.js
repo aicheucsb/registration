@@ -1,25 +1,41 @@
 import Axios from 'axios';
+import {TimeStringtoObject} from './format';
 
-export const MakeReservation = async (startTime, endTime, name, project, email, notes) => {
-    // This function takes in the startTime, endTime, name, project, email, and notes from the form
+export const MakeReservation = async (inputs) => {
+    // This function takes in an object inputs from the form
+    // Format:
+        // Contactperson: string
+        // Email: string
+        // Day: string
+        // Endtime: string
+        // Projectname: string
+        // Purpose: string
+        // Starttime: string
     // Sends an API Request to the serverless Vercel backend
     // And returns the status of the reservation and a message to be displayed on the frontend
 
     // startTime and endTime will be an object with the following fields:
     // year
-    // monthIndex
+    // month
     // day
     // hours
     // minutes
 
+    const name = inputs.Contactperson;
+    const email = inputs.Email;
+    const project = inputs.Projectname;
+    const notes = inputs.Purpose;
+    const startTime = TimeStringtoObject(inputs.Day, inputs.Starttime);
+    const endTime = TimeStringtoObject(inputs.Day, inputs.Endtime);
+
     // Convert the time to ISO time for the API
     // Date constructor: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date
     // new Date(year, monthIndex, day, hours, minutes)
-    let ISO_START = new Date(startTime.year, startTime.monthIndex, startTime.day, startTime.hours, startTime.minutes);
-    let ISO_END = new Date(endTime.year, endTime.monthIndex, endTime.day, endTime.hours, endTime.minutes);
+    let ISO_START = new Date(startTime.year, startTime.month, startTime.day, startTime.hours, startTime.minutes);
+    let ISO_END = new Date(endTime.year, endTime.month, endTime.day, endTime.hours, endTime.minutes);
 
-    ISO_START = ISOOffset(ISO_START.toISOString());
-    ISO_END = ISOOffset(ISO_END.toISOString());
+    ISO_START = TimeFormatAPI(ISO_START.toISOString());
+    ISO_END = TimeFormatAPI(ISO_END.toISOString());
 
     const reservationInfo = {
         start: ISO_START,
@@ -39,8 +55,16 @@ export const MakeReservation = async (startTime, endTime, name, project, email, 
     return {status: res.status, message: res.statusText};
 }
 
-const ISOOffset = (ISOString) => {
+const TimeFormatAPI = (ISOString) => {
     // input is an ISO string, such as 2011-10-05T14:48:00.000Z
+    // Return a properly formatted time, such as "2021-12-16T05:05:53+02:00"
+
+    let reformatted = ISOString.split(":");
+    // Pop the last element, which is the seconds and the Z:
+    // Expected: 2011-10-05T14:48:00.000Z -> 2011-10-05T14:48
+    reformatted.pop();
+
+    // Combine the string array now and
     // Reformat to be Pacific Time offset
-    return ISOString.replace("Z", "") + "+02:00";
+    return reformatted.join() + "+02:00";
 }
