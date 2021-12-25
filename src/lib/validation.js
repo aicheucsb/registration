@@ -1,4 +1,4 @@
-import moment from 'moment'
+import moment from 'moment-timezone' // https://stackoverflow.com/questions/47046067/typeerror-moment-tz-is-not-a-function
 
 export const ValidateTime = (startTime, endTime) => {
     // this function will check to see if the start and end time are valid
@@ -27,8 +27,9 @@ export const ValidateDate = (timeString) => {
 
     // use momentjs: https://momentjs.com/docs/#/query/is-before/
     const TODAY = moment().tz('America/Los_Angeles');
-    // check if the input year is before TODAY
-    return moment(timeString).isBefore(TODAY);
+    // console.log(TODAY);
+    // check if the input date is after TODAY
+    return moment(timeString).isAfter(TODAY);
 }
 
 const timeArraytoMin = (array) => {
