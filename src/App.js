@@ -3,7 +3,7 @@ import './App.css';
 
 function App() {
 
-  let label=['Start time', 'End time', 'Project name', 'Purpose','Contact person', 'Email'];
+  let label=['Project name', 'Purpose','Contact person', 'Email'];
   let labelfix = label.map(name => name.replace(' ',''));
 
   let labels = []; //https://stackoverflow.com/questions/2383484/how-to-create-a-dynamic-object-in-a-loop
@@ -17,20 +17,33 @@ function App() {
     labelfix.forEach(id => {
       inputs[id] = document.getElementById(id).value;
     })
-    // console.log(inputs);
+    inputs["Day"] = document.getElementById("Day").value;
+    inputs["Starttime"] = document.getElementById("Starttime").value;
+    inputs["Endtime"] = document.getElementById("Endtime").value;
+    console.log(inputs);
   }
 
   return (
     <div className="App">
-      <div>
-
+      <div id="reservations">
+        
         <form id="reserve" onSubmit={getInputs}> 
           {labels.map((labels) => { //https://stackoverflow.com/questions/36683770/how-to-get-the-value-of-an-input-field-using-reactjs
             return <label for={labels.labelfix}> {labels.label}
               <input id={labels.labelfix} name={labels.labelfix}/>
             </label>
           })}
-          <input type="submit" value="Submit!" />
+          <label title="mm/dd/yyyy">Day 
+            <input type="date" id="Day" name="Day"/>
+          </label>
+          <label title="format: hh:mm AM/PM">Start time
+            <input type="time" id="Starttime" name="Starttime"/>
+          </label>
+          <label title="format: hh:mm AM/PM">End time 
+            <input type="time" id="Endtime" name="Endtime"/>
+          </label>
+
+          <input type="submit" id="submitb" value="Submit!" />
         </form>
         
       </div>
