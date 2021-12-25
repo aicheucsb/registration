@@ -25,11 +25,13 @@ function App() {
     inputs["Endtime"] = document.getElementById("Endtime").value;
     const TIME_VALID = ValidateTime(inputs["Starttime"], inputs["Endtime"]);
     const DATE_VALID = ValidateDate(inputs["Day"]);
+    // console.log(inputs);
     if (TIME_VALID && DATE_VALID) {
       // Valid data, so make reservation
       MakeReservation(inputs).then((result) => {
         console.log(result);
       });
+      // console.log("Reservation made");
     } else if (!TIME_VALID && !DATE_VALID) {
       console.log("Both invalid day and invalid time");
     } else if (!TIME_VALID) {
@@ -38,7 +40,7 @@ function App() {
       // Invalid
       console.log("Invalid day");
     }
-    console.log(inputs);
+    // console.log(inputs);
   }
 
   return (
