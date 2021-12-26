@@ -3,8 +3,11 @@ import './App.css';
 import { ValidateTime, ValidateDate } from './lib/validation';
 import { MakeReservation } from './lib/calendar';
 import { ReactEmbeddedGoogleCalendar } from 'react-embedded-google-calendar';
+import { useState } from 'react'
 
 function App() {
+  const [status, setStatus] = useState(0);
+  const [message, setMessage] = useState(0);
 
   let label=['Project name', 'Purpose','Contact person', 'Email'];
   let labelfix = label.map(name => name.replace(' ',''));
@@ -30,6 +33,8 @@ function App() {
       // Valid data, so make reservation
       MakeReservation(inputs).then((result) => {
         console.log(result);
+        setStatus(result["status"]);
+        setMessage(result["message"]);
       });
       // console.log("Reservation made");
     } else if (!TIME_VALID && !DATE_VALID) {
@@ -74,7 +79,7 @@ function App() {
 
           <input type="submit" id="submitb" value="Reserve now!" />
         </form>
-        
+        <div>{status} {message}</div>
       </div>
     </div>
   );
