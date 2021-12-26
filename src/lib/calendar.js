@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import {TimeStringtoObject} from './format';
+import {TimeStringtoObject, GenerateISO} from './format';
 
 export const MakeReservation = async (inputs) => {
     // This function takes in an object inputs from the form
@@ -13,39 +13,29 @@ export const MakeReservation = async (inputs) => {
         // Starttime: string
     // Sends an API Request to the serverless Vercel backend
     // And returns the status of the reservation and a message to be displayed on the frontend
-
+    console.log(inputs);
     const name = inputs.Contactperson;
     const email = inputs.Email;
     const project = inputs.Projectname;
     const notes = inputs.Purpose;
     const startTime = TimeStringtoObject(inputs.Day, inputs.Starttime);
     const endTime = TimeStringtoObject(inputs.Day, inputs.Endtime);
-
+    // console.log(startTime);
     // startTime and endTime will be an object with the following fields:
         // year
         // month
         // day
         // hours
         // minutes
-
-    // Convert the time to ISO time for the API
-    // Date constructor: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date
-    // new Date(year, monthIndex, day, hours, minutes)
-    // monthIndex is 0 based: https://stackoverflow.com/questions/51861275/javascript-date-objects-constructor-returns-a-date-one-month-ahead
-    let ISO_START = new Date(startTime.year, startTime.month - 1, startTime.day, startTime.hours, startTime.minutes);
-    let ISO_END = new Date(endTime.year, endTime.month - 1, endTime.day, endTime.hours, endTime.minutes);
-
-    ISO_START = TimeFormatAPI(ISO_START.toISOString());
-    ISO_END = TimeFormatAPI(ISO_END.toISOString());
-
     const reservationInfo = {
-        start: ISO_START,
-        end: ISO_END,
+        start: GenerateISO(startTime),
+        end: GenerateISO(endTime),
         title: `${project} - ${name}`,
         description: `Contact ${email} if there are any questions about this reservation.\n\nPurpose/Notes:\n\n${notes}`,
         name: name,
         email: email
     };
+    // console.log(reservationInfo);
     // body:
     // start, end, title, description
     // title: Project Name + contact Name
@@ -62,22 +52,8 @@ export const MakeReservation = async (inputs) => {
             console.error(error);
         }
     });
+    // const res = {status: 201, statusText: "Hi"};
     console.log(res.status);
     console.log(res.statusText);
     return {status: res.status, message: res.statusText};
-}
-
-const TimeFormatAPI = (ISOString) => {
-    // input is an ISO string, such as 2011-10-05T14:48:00.000Z
-    // Return a properly formatted time, such as "2021-12-16T05:05:53+02:00"
-
-    let reformatted = ISOString.split(":");
-    // Pop the last element, which is the seconds and the Z:
-    // Expected: 2011-10-05T14:48:00.000Z -> 2011-10-05T14:48
-    reformatted.pop();
-    // Add in the :00 at the end
-    reformatted.push("00");
-    // Combine the string array now and
-    // Reformat to be Pacific Time offset
-    return reformatted.join(":") + "-08:00";
 }
