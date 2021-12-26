@@ -74,8 +74,9 @@ const TimeFormatAPI = (ISOString) => {
     // Pop the last element, which is the seconds and the Z:
     // Expected: 2011-10-05T14:48:00.000Z -> 2011-10-05T14:48
     reformatted.pop();
-
+    // Add in the :00 at the end
+    reformatted.push("00");
     // Combine the string array now and
     // Reformat to be Pacific Time offset
-    return reformatted.join() + "+02:00";
+    return reformatted.join(":") + "+02:00";
 }
