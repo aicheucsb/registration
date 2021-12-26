@@ -51,7 +51,7 @@ export const MakeReservation = async (inputs) => {
     // description will be:
     // "Contact " + email + " if there are any questions about this reservation."
     // "\n \n Purpose/Notes: "
-    const res = await Axios.post('https://ucsb-aiche-lab-reservation.vercel.app/api/calendar', reservationInfo);
+    const res = await Axios.post('https://ucsb-aiche-lab-reservation.vercel.app/api/calendar', reservationInfo, {"Content-type": "application/x-www-form-urlencoded"});
     console.log(res.status);
     console.log(res.statusText);
     return {status: res.status, message: res.statusText};
