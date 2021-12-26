@@ -42,11 +42,14 @@ function App() {
       // console.log("Reservation made");
     } else if (!TIME_VALID && !DATE_VALID) {
       console.log("Both invalid day and invalid time");
+      setMessage("Invalid day and time selection");
     } else if (!TIME_VALID) {
       console.log("Invalid start and end time");
+      setMessage("End time cannot be before start time");
     } else if (!DATE_VALID) {
       // Invalid
       console.log("Invalid day");
+      setMessage("Cannot make reservation in a past day");
     }
     // console.log(inputs);
   }
