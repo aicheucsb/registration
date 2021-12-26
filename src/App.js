@@ -6,8 +6,8 @@ import { ReactEmbeddedGoogleCalendar } from 'react-embedded-google-calendar';
 import { useState } from 'react'
 
 function App() {
-  const [status, setStatus] = useState(0);
-  const [message, setMessage] = useState(0);
+  const [status, setStatus] = useState("");
+  const [message, setMessage] = useState("");
 
   let label=['Project name', 'Purpose','Contact person', 'Email'];
   let labelfix = label.map(name => name.replace(' ',''));
@@ -34,7 +34,11 @@ function App() {
       MakeReservation(inputs).then((result) => {
         console.log(result);
         setStatus(result["status"]);
-        setMessage(result["message"]);
+        if (result["status"] === 201) {
+          setMessage("Successfully made reservation");
+        } else {
+          setMessage(result["message"]);
+        }
       });
       // console.log("Reservation made");
     } else if (!TIME_VALID && !DATE_VALID) {
