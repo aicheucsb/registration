@@ -31,8 +31,9 @@ export const MakeReservation = async (inputs) => {
     // Convert the time to ISO time for the API
     // Date constructor: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date
     // new Date(year, monthIndex, day, hours, minutes)
-    let ISO_START = new Date(startTime.year, startTime.month, startTime.day, startTime.hours, startTime.minutes);
-    let ISO_END = new Date(endTime.year, endTime.month, endTime.day, endTime.hours, endTime.minutes);
+    // monthIndex is 0 based: https://stackoverflow.com/questions/51861275/javascript-date-objects-constructor-returns-a-date-one-month-ahead
+    let ISO_START = new Date(startTime.year, startTime.month - 1, startTime.day, startTime.hours, startTime.minutes);
+    let ISO_END = new Date(endTime.year, endTime.month - 1, endTime.day, endTime.hours, endTime.minutes);
 
     ISO_START = TimeFormatAPI(ISO_START.toISOString());
     ISO_END = TimeFormatAPI(ISO_END.toISOString());
