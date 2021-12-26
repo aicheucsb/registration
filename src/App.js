@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { ValidateTime, ValidateDate } from './lib/validation';
 import { MakeReservation } from './lib/calendar';
