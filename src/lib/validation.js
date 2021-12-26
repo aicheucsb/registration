@@ -29,7 +29,7 @@ export const ValidateDate = (timeString) => {
     const TODAY = moment().tz('America/Los_Angeles');
     // console.log(TODAY);
     // check if the input date is after TODAY
-    return moment(timeString).isAfter(TODAY);
+    return moment(timeString).isSameOrAfter(TODAY);
 }
 
 const timeArraytoMin = (array) => {
