@@ -79,5 +79,5 @@ const TimeFormatAPI = (ISOString) => {
     reformatted.push("00");
     // Combine the string array now and
     // Reformat to be Pacific Time offset
-    return reformatted.join(":") + "+02:00";
+    return reformatted.join(":") + "-08:00";
 }
