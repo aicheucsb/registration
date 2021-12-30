@@ -4,9 +4,7 @@
   background-image: linear-gradient(rgba(194, 238, 255, 0.5), rgba(194, 238, 255,0.5)), url(https://gauchospace.ucsb.edu/courses/pluginfile.php/1/theme_adaptable/p1/1639686190/Campus_Point_Waves.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  /* background: linear-gradient(135deg, #b7eeff,#d0ffe0); */
   padding-bottom: 10px;
-  /* #ffe59e */
 }
 
 .App-header {
@@ -52,12 +50,13 @@ input {
   padding: 5px;
   border-width: 0 0 1px 0;
   border-color: transparent;
-  transition: 0.2s;
+  transition: 0.4s;
 }
 
 input:focus {
   outline: none;
   background-color: #fff9e9;
+  transition: 0.4s;
 }
 
 #reserve {
