@@ -35,23 +35,29 @@ function App() {
         setStatus(result["status"]);
         if (result["status"] === 201) {
           setMessage("Successfully made reservation");
+          document.getElementById("status-message").setAttribute("class", "pass-color");
         } else if (!result["status"]) {
           setMessage("An Unknown Error has occurred. Please contact the site manager.");
+          document.getElementById("status-message").setAttribute("class", "fail-color");
         } else {
           setMessage(result["message"]);
+          document.getElementById("status-message").setAttribute("class", "fail-color");
         }
       });
       // console.log("Reservation made");
     } else if (!TIME_VALID && !DATE_VALID) {
       console.log("Both invalid day and invalid time");
       setMessage("Invalid day and time selection");
+      document.getElementById("status-message").setAttribute("class", "fail-color");
     } else if (!TIME_VALID) {
       console.log("Invalid start and end time");
       setMessage("End time cannot be before start time");
+      document.getElementById("status-message").setAttribute("class", "fail-color");
     } else if (!DATE_VALID) {
       // Invalid
       console.log("Invalid day");
       setMessage("Cannot make reservation in a past day");
+      document.getElementById("status-message").setAttribute("class", "fail-color");
     }
     // console.log(inputs);
   }

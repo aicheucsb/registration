@@ -103,3 +103,11 @@ input[type=submit]:hover {
 #status {
   font-weight: bold;
 }
+
+.pass-color {
+  color:rgb(0, 184, 83);
+}
+
+.fail-color {
+  color:rgb(214, 0, 0);
+}
