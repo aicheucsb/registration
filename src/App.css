@@ -38,10 +38,14 @@ form label {
 .inputwrap {
   background-color: #0274be;
   padding: 0 0 1px 0;
+  margin: 3px 0 0 0;
+  transition: 0.3s;
+  box-sizing: border-box;
 }
 
 .inputwrap:hover {
-  background: linear-gradient(90deg, #0274be, #febc11);
+  /* background: linear-gradient(90deg, #0274be, #febc11); */
+  background: #febc11;
 }
 
 input {
@@ -50,7 +54,6 @@ input {
   padding: 5px;
   border-width: 0 0 1px 0;
   border-color: transparent;
-  transition: 0.4s;
 }
 
 input:focus {
@@ -89,4 +92,22 @@ input[type=submit] {
 input[type=submit]:hover {
   background-color: #febc11;
   cursor: pointer;
+}
+
+#status-message {
+  box-sizing: border-box;
+  padding: 0 30px 30px 30px;
+  font-size: 12px;
+}
+
+#status {
+  font-weight: bold;
+}
+
+.pass-color {
+  color:rgb(0, 184, 83);
+}
+
+.fail-color {
+  color:rgb(214, 0, 0);
 }
