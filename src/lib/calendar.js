@@ -4,7 +4,7 @@ import {TimeStringtoObject, GenerateISO} from './format';
 export const MakeReservation = async (inputs) => {
     // This function takes in an object inputs from the form
     // Format:
-        // Contactperson: string
+        // Contactname: string
         // Email: string
         // Day: string
         // Endtime: string
@@ -14,7 +14,7 @@ export const MakeReservation = async (inputs) => {
     // Sends an API Request to the serverless Vercel backend
     // And returns the status of the reservation and a message to be displayed on the frontend
     console.log(inputs);
-    const name = inputs.Contactperson;
+    const name = inputs.Contactname;
     const email = inputs.Email;
     const project = inputs.Projectname;
     const notes = inputs.Purpose;
