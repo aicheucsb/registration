@@ -40,6 +40,9 @@ function App() {
         } else {
           setMessage(result["message"]);
         }
+      }).catch((error) => {
+        console.error(error);
+        setMessage("An Unknown Error has occurred. Please contact the site manager.");
       });
       // console.log("Reservation made");
     } else if (!TIME_VALID && !DATE_VALID) {
