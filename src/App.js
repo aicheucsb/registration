@@ -84,7 +84,10 @@ function App() {
 
           <input type="submit" id="submitb" value="Reserve now!" />
         </form>
-        <div>{status} {message}</div>
+        <div id="status-message">
+          <div id="status">{status}</div> 
+          <div>{message}</div>
+        </div>
       </div>
     </div>
   );
