@@ -42,14 +42,16 @@ export const MakeReservation = async (inputs) => {
     // description will be:
     // "Contact " + email + " if there are any questions about this reservation."
     // "\n \n Purpose/Notes: "
-    const res = await Axios.post('https://ucsb-aiche-lab-reservation.vercel.app/api/calendar', reservationInfo, {}).catch((error) => {
+    let res = await Axios.post('https://ucsb-aiche-lab-reservation.vercel.app/api/calendar', reservationInfo, {}).catch((error) => {
         if (error.response) {
             console.error("Request error");
             console.error("Request error status: ", error.response.status);
             console.error("Request error data: ", error.response.data);
             console.error("Request error headers: ", error.response.headers);
+            res = {status: error.response.status, message: error.response.data};
         } else {
             console.error(error);
+            res = {status: "", message: error.data};
         }
     });
     // const res = {status: 201, statusText: "Hi"};
