@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { ValidateTime, ValidateDate } from './lib/validation';
 import { MakeReservation } from './lib/calendar';
@@ -6,8 +5,8 @@ import { ReactEmbeddedGoogleCalendar } from 'react-embedded-google-calendar';
 import { useState } from 'react'
 
 function App() {
-  const [status, setStatus] = useState(0);
-  const [message, setMessage] = useState(0);
+  const [status, setStatus] = useState("");
+  const [message, setMessage] = useState("");
 
   let label=['Project name', 'Purpose','Contact person', 'Email'];
   let labelfix = label.map(name => name.replace(' ',''));
@@ -34,16 +33,23 @@ function App() {
       MakeReservation(inputs).then((result) => {
         console.log(result);
         setStatus(result["status"]);
-        setMessage(result["message"]);
+        if (result["status"] === 201) {
+          setMessage("Successfully made reservation");
+        } else {
+          setMessage(result["message"]);
+        }
       });
       // console.log("Reservation made");
     } else if (!TIME_VALID && !DATE_VALID) {
       console.log("Both invalid day and invalid time");
+      setMessage("Invalid day and time selection");
     } else if (!TIME_VALID) {
       console.log("Invalid start and end time");
+      setMessage("End time cannot be before start time");
     } else if (!DATE_VALID) {
       // Invalid
       console.log("Invalid day");
+      setMessage("Cannot make reservation in a past day");
     }
     // console.log(inputs);
   }
