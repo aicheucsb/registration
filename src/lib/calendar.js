@@ -35,7 +35,7 @@ export const MakeReservation = async (inputs) => {
         name: name,
         email: email
     };
-    // console.log(reservationInfo);
+    console.log(reservationInfo);
     // body:
     // start, end, title, description
     // title: Project Name + contact Name
