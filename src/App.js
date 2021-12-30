@@ -35,6 +35,8 @@ function App() {
         setStatus(result["status"]);
         if (result["status"] === 201) {
           setMessage("Successfully made reservation");
+        } else if (!result["status"]) {
+          setMessage("An Unknown Error has occurred. Please contact the site manager.");
         } else {
           setMessage(result["message"]);
         }
