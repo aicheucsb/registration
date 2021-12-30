@@ -48,10 +48,10 @@ export const MakeReservation = async (inputs) => {
             console.error("Request error status: ", error.response.status);
             console.error("Request error data: ", error.response.data);
             console.error("Request error headers: ", error.response.headers);
-            res = {status: error.response.status, message: error.response.data};
+            return {status: error.response.status, message: error.response.data};
         } else {
             console.error(error);
-            res = {status: "", message: error.data};
+            return {status: "", message: error.data};
         }
     });
     // const res = {status: 201, statusText: "Hi"};
